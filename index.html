@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Tranfer Request Menu</title>
+
+      
+    <script src="js/jquery.min.js"></script>   
+    <script src="js/bootstrap.min.js"></script>       
+    <link   href="css/bootstrap.min.css" rel="stylesheet"> 
+      
+      
+  <!--  <script src="js/staffingChange.js"></script>  --> 
+       
+    <script src="https://hpe.sharepoint.com/teams/TestingTD/GlobalServiceDesk/SiteAssets/StaffingChanges/js/jquery.js"></script> 
+      
+    <script  src="https://hpe.sharepoint.com/teams/TestingTD/GlobalServiceDesk/SiteAssets/StaffingChanges/js/bootstrap.js"></script> 
+      
+    <script type="text/javascript" src="https://hpe.sharepoint.com/teams/TestingTD/GlobalServiceDesk/SiteAssets/StaffingChanges/staffingChangeD.js"></script>  
+                                                                                                                                                
+    <link href="https://hpe.sharepoint.com/teams/TestingTD/GlobalServiceDesk/SiteAssets/StaffingChanges/css/bootstrap.min.css" rel="stylesheet">   
+      
+      
+<!--CSS STYLES-->    
+<style> 
+
+  .checkbox .btn,
+
+  .checkbox-inline .btn {
+
+    padding-left: 2em;
+
+    min-width: 8em;
+  }
+
+  .checkbox label,
+
+  .checkbox-inline label {
+
+    text-align: left;
+
+    padding-left: 0.5em;
+    } 
+    .top10
+    {
+        margin-top: 10px;         
+    }
+     .top40
+    {
+        margin-top: 40px;         
+    }
+    
+    
+    
+    .leftMargin
+    {
+        margin-left: 15px;        
+    }
+    .dropdown
+    {
+        color: black;         
+        background-color: whitesmoke;        
+    }
+    #searchInput{        
+        
+        color: black;         
+        background-color: whitesmoke;         
+        
+    }
+    .headerformat{
+        
+        
+        color: !important white;
+        
+    }
+    h4.panel-title.headerformat {
+    color: white;
+     }
+    .centercontents{
+        text-align: center !important;
+        
+    }
+    
+    
+  
+</style> <!--End Of Styles-->
+    
+</head>  <!--------------------------------End of Head Section------------------------------>
+    
+<body>
+    
+<div class="container">
+    
+<!-------------------------------- Start of Form First Menu ------------------------------>
+   
+<!------------------------->    
+<!--Choose Employee Panel-->
+<!-------------------------> 
+     
+    
+<div class="panel panel-primary" rel="js-employeeSearch" style="max-width: 550px">   
+    
+ <div class="panel-heading">  
+     
+        <h4 class="panel-title headerformat">Staffing Change Request
+        </h4>
+         
+  </div> 
+    
+ <div class="panel-body">
+
+     
+  <div class="row">  
+      
+        <div class="col-md-8"><h4>Choose Employee for Staffing Changes:</h4></div>
+      
+  </div> <!-- end of row -->    
+     
+     
+    
+  <div class="row">  
+      
+        <div class="form-group col-md-4">
+          <label for="sel1">Select Site:</label>
+          <select class="form-control" id="sel1">
+            <option>Pontiac</option>
+            <option>Tulsa</option>
+          </select>
+       </div>
+      
+  </div> <!-- end of row --> 
+      
+    
+   <div class="row form-group">  
+               
+        <label for="searchInput" class="leftMargin">Enter all or part of the Employees Name:</label>
+       
+        <div class="input-group col-md-6 leftMargin">  
+            
+            <input type="text" id="searchInput" class="form-control" placeholder="Search">
+
+            <div class="input-group-btn">
+              <button class="btn btn-default" id="btnQueryEmp" type="button">
+                <i class="glyphicon glyphicon-search"></i>
+              </button>
+            </div>
+      
+        </div>
+       
+    </div>  <!--End of row-->   
+       
+    
+   <div class="row form-group">  
+       
+     <div class="form-group col-md-8">
+             
+            
+         <label for="sel2">Choose Employee:</label>
+                
+          <select class="form-control" id="sel2">
+            <option>No Results</option>
+          </select>
+      
+    </div>
+     
+   </div> <!-- end of Search For Employee name --> 
+    
+    
+    <div class="row form-group">  
+              
+         <button type="button" class="btn btn-primary leftMargin" disabled="disabled" id="btnChooseEmp">Choose Employee</button>
+           
+    </div>
+    </div>  <!-- Panel Panel Body -->  
+    
+  </div><!--End of Panel --> 
+    
+<!-------------------------->     
+<!--Choose Staffing Change--> 
+<!-------------------------->     
+<div class="panel panel-primary" rel="js-staffingChange">  
+    
+<div class="panel-heading">     
+        <h4 class="panel-title headerformat">Staffing Change Request
+        </h4>         
+  </div> 
+  
+
+<div class="panel-body">   <!-- /.row --> 
+    
+    
+  <div class="row">  
+      
+        <div class="col-md-8"><h4 id="chooseChangesTitle"></h4></div>
+      
+  </div> <!-- end of row -->     
+  
+    
+
+ <div class="row">          <!-- Header--> 
+     
+      <div class="col-md-3"></div>     
+      <div class="col-md-3"><b>Current:</b></div>      
+      <div class="col-md-2"><b>Change?</b></div>     
+      <div class="col-md-4 hidden" id="divNewValue"><b>New Value:</b></div> 
+     
+ </div>                     <!--Header Row--> 
+    
+    
+   <div class="row top10">          <!-- Header-->
+     
+       <div class="col-md-3"><b>Assignment:</b></div>         
+     <div class="col-md-3 clCurAssignment" id="dvCurrentAssignment">currentAssignment</div>  
+       
+       
+      <div class="col-md-2">       
+        <div class="form-group">
+         <div class="checkbox-inline"> 
+          <label class="checkbox-inline"><input class="checkChange" type="checkbox" id="ckAssignment" value="">Yes</label>
+          </div>
+        </div>        
+      </div>   <!--End Choice Box Column-->
+       
+      <div class="form-group col-md-3">
+           <select class="form-control-inline hidden dropdown" id="selAssignment">
+            <option></option>
+           </select>          
+       </div>  
+      </div>                     <!--Header Row-->   
+   
+    
+    <div class="row">          <!-- Header-->
+     
+        <div class="col-md-3"><b>Position:</b></div>         
+        <div class="col-md-3 clCurrPos" id="dvCurrentPosition">currentPosition</div>         
+        <div class="col-md-2">       
+            <div class="form-group">
+                <div class="checkbox-inline">
+                    <label class="checkbox-inline"><input class="checkChange" type="checkbox" id="ckPosition" value="">Yes</label>
+                </div>
+            </div>          
+         </div>   <!--End Choice Box Column-->       
+        
+         <div class="form-group col-md-3">    
+            <select class="form-control-inline hidden dropdown" id="selPosition">  
+             <option></option>                
+            </select>
+          </div>         
+      </div>             
+    
+  <div class="row">          <!-- Header-->     
+      <div class="col-md-3"><b>Shift:</b></div>      
+    <div class="col-md-3 clCurShift" id="dvCurrentShift">currentShift</div>  
+      <div class="col-md-2">       
+         <div class="form-group">
+          <div class="checkbox-inline">
+              <label class="checkbox-inline"><input class="checkChange" type="checkbox" id="ckShift" value="">Yes</label> 
+          </div>
+          </div>        
+       </div>   <!--End Choice Box Column-->       
+       <div class="form-group col-md-3">    
+            <select class="form-control-inline hidden dropdown"  id="selShift"> 
+             <option>1</option>
+             <option>2</option>
+             <option>3</option>               
+            </select>
+       </div>     
+   </div>               
+   
+    
+    <div class="row top10">             
+       <div class="col-md-7">  
+        <label for="comment">Comments:</label>
+        <textarea class="form-control" rows="2" id="comment"></textarea>
+        </div>         
+     </div>
+    
+    <div class="row top10">  
+       <button type="button" id="divSubmitBtn" class="btn btn-primary btn-md leftMargin" disabled="disabled">Submit</button>
+    </div>
+    
+  </div> <!--End of Panel Body-->
+    
+</div><!--End of Panel-->   
+    
+<!-- -------------------------->    
+<!-- Transfer Request Summary--> 
+<!-- -------------------------->     
+<div class="panel panel-primary" rel="js-transferSummary" style="max-width: 800px">  
+    
+   <div class="panel-heading">  
+        <h4 class="panel-title headerformat">Staffing Change Request</h4>
+   </div>
+    
+<div class="panel-body">   <!-- /.row --> 
+    
+    
+    
+     <div class="row">  
+      
+        <div class="col-md-8"><h4 id="transferTitle"></h4></div>
+      
+     </div> <!-- end of row -->   
+    
+    
+    
+    
+
+    <div class="row">          <!-- Header-->
+        <div class="col-md-3"></div> 
+        <div class="col-md-3"><b>Current</b></div> 
+        <div class="col-md-3"><b>New</b></div> 
+    </div>                     <!--Header Row--> 
+   
+    <div class="row hidden" id="dvAssign">          <!-- Header-->
+    <div class="col-md-3 top10"><b>Assignment:</b></div>         
+    <div class="col-md-3 top10 clCurAssignment">currentAssignment</div> 
+    <div class="col-md-3 top10" id="dvNewAssign">newAssignment</div> 
+    </div>   
+    
+   <div class="row top10 hidden" id="dvPosition">          <!-- Header-->     
+    <div class="col-md-3"><b>Position:</b></div>         
+    <div class="col-md-3 clCurrPos">currentPosition</div>       
+    <div class="col-md-3" id="dvNewPosition">newPosition</div> 
+   </div>               
+   
+    <div class="row top10 hidden" id="dvShift">          <!-- Header-->     
+        <div class="col-md-3"><b>Shift:</b></div>         
+        <div class="col-md-3 clCurShift">currentShift</div>  
+        <div class="col-md-3" id="dvNewShift">newShift</div> 
+   </div> 
+    
+    <div class="row top10">          <!-- Header-->     
+        <div class="col-md-3 top40"><b>Comments:</b></div>         
+        <div class="col-md-6 top40" id="dvComments">comments</div>  
+   </div> 
+        
+    <button type="button" id="btnConfirmSubmission" class="btn btn-primary btn-md top40">Confirm Submission</button>    
+     
+</div> <!--End of Panel Body-->
+    
+</div><!--End of Panel-->
+    
+ <!-- -------------------------->    
+ <!-----Submitted Confirmation--> 
+ <!-- -------------------------->      
+<div class="panel panel-primary" rel="js-subConfirmation" style="max-width: 550px">   
+    
+    <div class="panel-heading">      
+        <h4 class="panel-title headerformat">Staffing Change Request
+        </h4>         
+     </div> 
+    
+  <div class="panel-body">   <!-- /.row -->  
+   <h3 style="text-align:center">Your Request Has Been Submitted</h3>     
+   <p><br>An email has been sent for approval. You can close this window or click New Request to create a new request.</p> 
+      
+    <button type="button" id="btnCloseButton" class="btn btn-primary btn-md top10">New Request</button>    
+   </div> <!--End of Panel Body-->
+    
+</div><!--End of Panel-->      
+    
+<!------------------------------ END OF PANELS ---------------------->    
+  
+    
+<!--Cancel button-->   
+  
+<button type="button" id="btnCancel" class="btn btn-warning btn-md">Cancel</button>
+    
+</div>  <!-- end of container -->
+        
+
+  </body>
+</html>
